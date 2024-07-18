@@ -2,7 +2,7 @@
 -- Date: 07/18/2024
 -- ECS 140A HW3
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 1 
 myremoveduplicates :: Eq a => [a] -> [a] 
 myremoveduplicates student_data
@@ -15,7 +15,7 @@ myremoveduplicates_pm [] = []
 myremoveduplicates_pm (x:xs)
     | x `elem` xs = myremoveduplicates xs
     | otherwise = x : myremoveduplicates xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 2
 myintersection :: Eq a => [a] -> [a] -> [a]
 myintersection student_data1 student_data2
@@ -30,7 +30,7 @@ myintersection_pm [] _ = []
 myintersection_pm (x:xs) (y:ys)
     | x `elem` y:ys = myintersection xs (y:ys)
     | otherwise = myintersection xs (y:ys)
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 3
 mynthtail :: Eq a => Int -> [a] -> [a]
 mynthtail n student_data
@@ -42,7 +42,7 @@ mynthtail_pm :: Eq a => Int -> [a] -> [a]
 mynthtail_pm 0 (x:xs) = x:xs
 mynthtail_pm _ [] = []
 mynthtail_pm n (x:xs) = mynthtail (n - 1) xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 4
 mylast :: Eq a => [a] -> [a]
 mylast student_data
@@ -54,7 +54,7 @@ mylast_pm :: Eq a => [a] -> [a]
 mylast_pm [] = []
 mylast_pm (x:[]) = [x]
 mylast_pm (x:xs) = mylast xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 5
 myreverse :: Eq a => [a] -> [a]
 myreverse student_data = myreversehelper student_data []
@@ -72,7 +72,7 @@ myreversehelper_pm :: Eq a => [a] -> [a] -> [a]
 myreversehelper_pm [] student_data = student_data
 myreversehelper_pm (x:[]) student_data = x:student_data
 myreversehelper_pm (x:xs) student_data = myreversehelper_pm xs (x:student_data)
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 6
 myreplaceall :: Eq a => a -> a -> [a] -> [a]
 myreplaceall replaceWith toReplace student_data
@@ -85,7 +85,7 @@ myreplaceall_pm _ _ [] = []
 myreplaceall_pm a b (x:xs)
     | x == b = a : myreplaceall a b xs
     | otherwise = x : myreplaceall a b xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 7
 myordered :: (Ord a) => [a] -> Bool
 myordered student_data 
@@ -100,7 +100,7 @@ myordered_pm (x:[]) = True
 myordered_pm (x:xs) 
     | x > (head xs) = False
     | otherwise = myordered xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Problem 8
 -- Process: Call computeFees -> determine_students -> calculate student based on type 
 -- Have a function to determine type of student
@@ -163,7 +163,7 @@ get_aid_status student_data = get_element_by_index 8 student_data
 get_nodegree_status :: [String] -> String
 get_nodegree_status student_data = get_element_by_index 6 student_data
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 -- Useful helper functions to process strings and convert string to int
 
 string_to_int :: String -> Int -- function obtained from https://www.tutorialspoint.com/haskell-program-to-convert-the-string-into-an-integer
@@ -182,4 +182,4 @@ split_string_helper delimiter (x:xs) build_list
 get_element_by_index :: Int -> [String] -> String
 get_element_by_index 0 (x:_) = x
 get_element_by_index n (_:xs) = get_element_by_index (n-1) xs
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
