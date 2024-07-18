@@ -2,20 +2,19 @@
 -- Date: 07/18/2024
 -- ECS 140A HW3
 
-
 ---------------------------------------------------------------------------------------------------------------------------
 -- Problem 1 
-myremovedduplicates :: Eq a => [a] -> [a] 
-myremovedduplicates student_data
+myremoveduplicates :: Eq a => [a] -> [a] 
+myremoveduplicates student_data
     | null student_data = []
-    | head student_data `elem` tail student_data = myremovedduplicates (tail student_data)
-    | otherwise = (head student_data) : myremovedduplicates (tail student_data)
+    | head student_data `elem` tail student_data = myremoveduplicates (tail student_data)
+    | otherwise = (head student_data) : myremoveduplicates (tail student_data)
 
-myremovedduplicates_pm :: Eq a => [a] -> [a]
-myremovedduplicates_pm [] = []
-myremovedduplicates_pm (x:xs)
-    | x `elem` xs = myremovedduplicates xs
-    | otherwise = x : myremovedduplicates xs
+myremoveduplicates_pm :: Eq a => [a] -> [a]
+myremoveduplicates_pm [] = []
+myremoveduplicates_pm (x:xs)
+    | x `elem` xs = myremoveduplicates xs
+    | otherwise = x : myremoveduplicates xs
 ---------------------------------------------------------------------------------------------------------------------------
 -- Problem 2
 myintersection :: Eq a => [a] -> [a] -> [a]
@@ -103,12 +102,12 @@ myordered_pm (x:xs)
     | otherwise = myordered xs
 ---------------------------------------------------------------------------------------------------------------------------
 -- Problem 8
--- Process: Call computefees -> determine_students -> calculate student based on type 
+-- Process: Call computeFees -> determine_students -> calculate student based on type 
 -- Have a function to determine type of student
 -- Separate functions to calculate fees for each type of student (Degree_aid, Degree_no_aid, Senior, Certificate)
 
-computefees :: String -> Int
-computefees student_data
+computeFees :: String -> Int
+computeFees student_data 
     | null student_data = 0
     | otherwise = determine_student (split_string ';' student_data)
 
