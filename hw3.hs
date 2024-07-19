@@ -5,10 +5,10 @@
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 1 
 myremoveduplicates :: Eq a => [a] -> [a] 
-myremoveduplicates student_data
-    | null student_data = []
-    | head student_data `elem` tail student_data = myremoveduplicates (tail student_data)
-    | otherwise = (head student_data) : myremoveduplicates (tail student_data)
+myremoveduplicates lst
+    | null lst = []
+    | head lst `elem` tail lst = myremoveduplicates (tail lst)
+    | otherwise = (head lst) : myremoveduplicates (tail lst)
 
 myremoveduplicates_pm :: Eq a => [a] -> [a]
 myremoveduplicates_pm [] = []
@@ -18,11 +18,11 @@ myremoveduplicates_pm (x:xs)
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 2
 myintersection :: Eq a => [a] -> [a] -> [a]
-myintersection student_data1 student_data2
-    | null student_data1 = []
-    | null student_data2 = []
-    | head student_data1 `elem` student_data2 = (head student_data1) : myintersection (tail student_data1) student_data2
-    | otherwise = myintersection (tail student_data1) student_data2
+myintersection lst1 lst2
+    | null lst1 = []
+    | null lst2 = []
+    | head lst1 `elem` lst2 = (head lst1) : myintersection (tail lst1) lst2
+    | otherwise = myintersection (tail lst1) lst2
 
 myintersection_pm :: Eq a => [a] -> [a] -> [a]
 myintersection_pm _ [] = []
@@ -33,10 +33,10 @@ myintersection_pm (x:xs) (y:ys)
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 3
 mynthtail :: Eq a => Int -> [a] -> [a]
-mynthtail n student_data
-    | null student_data = []
-    | n == 0 = student_data
-    | otherwise = mynthtail (n - 1) (tail student_data)
+mynthtail n lst
+    | null lst = []
+    | n == 0 = lst
+    | otherwise = mynthtail (n - 1) (tail lst)
 
 mynthtail_pm :: Eq a => Int -> [a] -> [a]
 mynthtail_pm 0 (x:xs) = x:xs
@@ -45,10 +45,10 @@ mynthtail_pm n (x:xs) = mynthtail (n - 1) xs
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 4
 mylast :: Eq a => [a] -> [a]
-mylast student_data
-    | null student_data = [] -- base case: return an empty list if input is empty
-    | null (tail student_data) = [head student_data] -- base case: return the first element if tail is empty
-    | otherwise = mylast (tail student_data) -- recursive call: run mylast again with the tail
+mylast lst
+    | null lst = [] -- base case: return an empty list if input is empty
+    | null (tail lst) = [head lst] -- base case: return the first element if tail is empty
+    | otherwise = mylast (tail lst) -- recursive call: run mylast again with the tail
 
 mylast_pm :: Eq a => [a] -> [a]
 mylast_pm [] = []
@@ -57,28 +57,28 @@ mylast_pm (x:xs) = mylast xs
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 5
 myreverse :: Eq a => [a] -> [a]
-myreverse student_data = myreversehelper student_data []
+myreverse lst = myreversehelper lst []
 
 myreversehelper :: Eq a => [a] -> [a] -> [a]
-myreversehelper student_data1 student_data2
-    | null student_data1 = student_data2
-    | null (tail student_data1) = (head student_data1):student_data2
-    | otherwise = myreversehelper (tail student_data1) ((head student_data1):student_data2)
+myreversehelper lst1 lst2
+    | null lst1 = lst2
+    | null (tail lst1) = (head lst1):lst2
+    | otherwise = myreversehelper (tail lst1) ((head lst1):lst2)
 
 myreverse_pm :: Eq a => [a] -> [a]
-myreverse_pm student_data = myreversehelper_pm student_data []
+myreverse_pm lst = myreversehelper_pm lst []
 
 myreversehelper_pm :: Eq a => [a] -> [a] -> [a]  
-myreversehelper_pm [] student_data = student_data
-myreversehelper_pm (x:[]) student_data = x:student_data
-myreversehelper_pm (x:xs) student_data = myreversehelper_pm xs (x:student_data)
+myreversehelper_pm [] lst = lst
+myreversehelper_pm (x:[]) lst = x:lst
+myreversehelper_pm (x:xs) lst = myreversehelper_pm xs (x:lst)
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 6
 myreplaceall :: Eq a => a -> a -> [a] -> [a]
-myreplaceall replaceWith toReplace student_data
-    | null student_data = []
-    | head student_data == toReplace = replaceWith : myreplaceall replaceWith toReplace (tail student_data)
-    | otherwise = (head student_data) : myreplaceall replaceWith toReplace (tail student_data)
+myreplaceall replaceWith toReplace lst
+    | null lst = []
+    | head lst == toReplace = replaceWith : myreplaceall replaceWith toReplace (tail lst)
+    | otherwise = (head lst) : myreplaceall replaceWith toReplace (tail lst)
 
 myreplaceall_pm :: Eq a => a -> a -> [a] -> [a]
 myreplaceall_pm _ _ [] = []
@@ -88,11 +88,11 @@ myreplaceall_pm a b (x:xs)
 -------------------------------------------------------------------------------------------------------------------------
 -- Problem 7
 myordered :: (Ord a) => [a] -> Bool
-myordered student_data 
-    | null student_data = True
-    | null (tail student_data) = True
-    | head student_data > (head (tail student_data)) = False
-    | otherwise = myordered (tail student_data)
+myordered lst 
+    | null lst = True
+    | null (tail lst) = True
+    | head lst > (head (tail lst)) = False
+    | otherwise = myordered (tail lst)
 
 myordered_pm :: (Ord a) => [a] -> Bool
 myordered_pm [] = True
@@ -107,61 +107,61 @@ myordered_pm (x:xs)
 -- Separate functions to calculate fees for each type of student (Degree_aid, Degree_no_aid, Senior, Certificate)
 
 computeFees :: String -> Int
-computeFees student_data 
-    | null student_data = 0
-    | otherwise = determine_student (split_string ';' student_data)
+computeFees lst 
+    | null lst = 0
+    | otherwise = determine_student (split_string ';' lst)
 
 -- Functions to determine what kind of student is being processed
 determine_student :: [String] -> Int
-determine_student student_data 
-    | get_degree_status student_data == "Y" = determine_aid_student student_data
-    | otherwise = determine_nodegree_student student_data
+determine_student lst 
+    | get_degree_status lst == "Y" = determine_aid_student lst
+    | otherwise = determine_nodegree_student lst
 
 determine_aid_student :: [String] -> Int
-determine_aid_student student_data
-    | get_aid_status student_data == "Y" = calculate_degree_finaid student_data
-    | otherwise = calculate_degree_no_aid student_data
+determine_aid_student lst
+    | get_aid_status lst == "Y" = calculate_degree_finaid lst
+    | otherwise = calculate_degree_no_aid lst
 
 determine_nodegree_student :: [String] -> Int
-determine_nodegree_student student_data
-    | get_nodegree_status student_data == "S" = calculate_senior student_data
-    | otherwise = calculate_cert_student student_data
+determine_nodegree_student lst
+    | get_nodegree_status lst == "S" = calculate_senior lst
+    | otherwise = calculate_cert_student lst
 
 -- Calculation Functions
 calculate_degree_finaid :: [String] -> Int
-calculate_degree_finaid student_data 
-    | (get_credits student_data) >= 12 && 3450 <= (get_aid_amount student_data) = 0
-    | (get_credits student_data) >= 12 = 3450 - (get_aid_amount student_data)
-    | otherwise = ((get_credits student_data) * 275) + 150 - (get_aid_amount student_data)
+calculate_degree_finaid lst 
+    | (get_credits lst) >= 12 && 3450 <= (get_aid_amount lst) = 0
+    | (get_credits lst) >= 12 = 3450 - (get_aid_amount lst)
+    | otherwise = ((get_credits lst) * 275) + 150 - (get_aid_amount lst)
 
 calculate_degree_no_aid :: [String] -> Int
-calculate_degree_no_aid student_data
-    | (get_credits student_data) >= 12 = 3450
-    | otherwise = ((get_credits student_data) * 275) + 150
+calculate_degree_no_aid lst
+    | (get_credits lst) >= 12 = 3450
+    | otherwise = ((get_credits lst) * 275) + 150
 
 calculate_senior :: [String] -> Int
-calculate_senior student_data
-    | get_credits student_data > 6 = 100 + 50 * ((get_credits student_data) - 6)
+calculate_senior lst
+    | get_credits lst > 6 = 100 + 50 * ((get_credits lst) - 6)
     | otherwise = 100
 
 calculate_cert_student :: [String] -> Int
-calculate_cert_student student_data = 700 + 300 * (get_credits student_data)
+calculate_cert_student lst = 700 + 300 * (get_credits lst)
 
 -- Get Student Data Functions
 get_credits :: [String] -> Int
-get_credits student_data = string_to_int (get_element_by_index 4 student_data)
+get_credits lst = string_to_int (get_element_by_index 4 lst)
 
 get_aid_amount :: [String] -> Int
-get_aid_amount student_data = string_to_int (get_element_by_index 9 student_data)
+get_aid_amount lst = string_to_int (get_element_by_index 9 lst)
 
 get_degree_status :: [String] -> String
-get_degree_status student_data = get_element_by_index 5 student_data
+get_degree_status lst = get_element_by_index 5 lst
 
 get_aid_status :: [String] -> String
-get_aid_status student_data = get_element_by_index 8 student_data
+get_aid_status lst = get_element_by_index 8 lst
 
 get_nodegree_status :: [String] -> String
-get_nodegree_status student_data = get_element_by_index 6 student_data
+get_nodegree_status lst = get_element_by_index 6 lst
 
 -------------------------------------------------------------------------------------------------------------------------
 -- Useful helper functions to process strings and convert string to int
